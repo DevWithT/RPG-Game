@@ -116,7 +116,7 @@ const locations = [
   {
     name: "Woods loc 9",
     "button text": ["Chop Trees", "Follow the path", "Head Back"],
-    "button functions": [chopLog, goMine, goExplore],
+    "button functions": [chopLog, deeperWoods, goExplore],
     text: "As you step into the woods you can hear the wind howl. The trees move in a mesmorizing way. Do not get distracted!"
   },
   {
@@ -130,7 +130,13 @@ const locations = [
     "button text": ["Sell Weapon", "Sell Wood", "Leave Shop"],
     "button functions": [sellWeapon, sellLog, goTown],
     text: "What would you like to sell?"
-  },
+    },
+    {
+        name: "Deeper Woods loc 12",
+        "button text": ["Chop Trees", "Follow Further", "Head Back"],
+        "button functions": [chopMaple, deeperWoods, goWoods],
+        text: "As you step into the woods you can hear the wind howl. The trees move in a mesmorizing way. Do not get distracted!"
+    },
 ];
 
 // initialize buttons
@@ -163,6 +169,10 @@ function goMine(){
   update(locations[10]);
 }
 
+function deeperWoods() {
+    update(locations[12]);
+}
+
 function goTown() {
   update(locations[0]);
   slimeMonster.style.display = "none";
@@ -188,31 +198,31 @@ function sellLog() {
   if (inventory.indexOf("Log") > -1) {
     gold += 10;
     goldText.innerText = gold;
-    let currentLogs = inventory.splice(inventory.indexOf("Log"));
+    let currentLogs = inventory.pop(inventory.indexOf("Log"));
     text.innerText = "You sold a " + currentLogs + ".";
     text.innerText += " In your inventory you have: " + inventory + ", ";
   } else if (inventory.indexOf("Maple") > -1) {
       gold += 50;
       goldText.innerText = gold;
-      let currentLogs = inventory.shift();
+      let currentLogs = inventory.pop(inventory.indexOf("Maple"));
       text.innerText = "You sold a " + currentLogs + ".";
       text.innerText += " In your inventory you have: " + inventory + ", ";
     } else if (inventory.indexOf("RedWood") > -1) {
       gold += 300;
       goldText.innerText = gold;
-      let currentLogs = inventory.shift();
+      let currentLogs = inventory.pop(inventory.indexOf("RedWood"));
       text.innerText = "You sold a " + currentLogs + ".";
       text.innerText += " In your inventory you have: " + inventory + ", ";
     } else if (inventory.indexOf("Divine Willow") > -1) {
       gold += 500;
       goldText.innerText = gold;
-      let currentLogs = inventory.shift();
+      let currentLogs = inventory.pop(inventory.indexOf("Divine Willow"));
       text.innerText = "You sold a " + currentLogs + ".";
       text.innerText += " In your inventory you have: " + inventory + ", ";
     } else if (inventory.indexOf("Holy Oak") > -1) {
       gold += 1000000;
       goldText.innerText = gold;
-      let currentLogs = inventory.shift();
+      let currentLogs = inventory.pop(inventory.indexOf("Holy Oak"));
       text.innerText = "You sold a " + currentLogs + ".";
       text.innerText += " In your inventory you have: " + inventory + ", ";
     }
@@ -229,7 +239,17 @@ if (currentLogs < logs.length - 1){
   inventory.push(newLog);
   text.innerText += " You have added " + newLog + " to your inventory!"
   text.innerText += " In your inventory you now have: " + inventory + ", ";
+    }
 }
+
+function chopMaple() {
+    if (currentLogs < logs.length - 1) {
+        let mapleLog = logs[1].name;
+        text.innerText = "You have chopped " + mapleLog + ".";
+        inventory.push(mapleLog);
+        text.innerText += " You have added " + mapleLog + " to your inventory!"
+        text.innerText += " In your inventory you now have: " + inventory + ", ";
+    }
 }
 
 function buyHealth() {
