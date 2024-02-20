@@ -7,6 +7,8 @@ let monsterHealth;
 let inventory = ["stick"];
 let currentOres = 0;
 let currentLogs = 0;
+var inventoryStack = inventory.reduce((cnt, cur) => (cnt[cur] = cnt[cur] + 1 || 1, cnt), {});
+
 
 const button1 = document.querySelector('#button1');
 const button2 = document.querySelector("#button2");
@@ -268,12 +270,14 @@ async function chopLog(){
     } else {
         if (currentLogs < logs.length - 1) {
             text.innerText = "Swinging Axe..."
-            await sleep(2000);
+            await sleep(Math.floor(Math.random() * 3000));
             let newLog = logs[currentLogs].name;
             text.innerText = "You have chopped " + newLog + ".";
+            await sleep(1500);
             inventory.push(newLog);
-            text.innerText += " You have added " + newLog + " to your inventory!"
-            text.innerText += " In your inventory you now have: " + inventory + ", ";
+            text.innerText = " You have added " + newLog + " to your inventory!"
+            await sleep(1500);
+            text.innerText = " In your inventory you now have: " + JSON.stringify(inventoryStack) + ", ";
             if (randomFight()) {
                 fightSlime();
             }
