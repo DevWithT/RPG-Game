@@ -133,9 +133,27 @@ const locations = [
     },
     {
         name: "Deeper Woods loc 12",
-        "button text": ["Chop Trees", "Follow Further", "Head Back"],
+        "button text": ["Chop Maples", "Keep Going", "Head Back"],
+        "button functions": [chopMaple, woodPath, goWoods],
+        text: "You step further into the woods, it gets darker. It's definitely much creepier. You hear sounds all around you. What do you want to do?"
+    },
+    {
+        name: "Wooded Path loc 13",
+        "button text": ["Go Left", "Go Right", "Head Back"],
+        "button functions": [leftPath, rightPath, goWoods],
+        text: "There is a fork in the road. A path to the left and a path to the right. Be careful what you choose."
+    },
+    {
+        name: "Left Path loc 14",
+        "button text": ["Go Left", "Go Right", "Head Back"],
         "button functions": [chopMaple, deeperWoods, goWoods],
-        text: "As you step into the woods you can hear the wind howl. The trees move in a mesmorizing way. Do not get distracted!"
+        text: "You head left, the path seemed to have went on forever. You come to a tine cabin. Something feels off."
+    },
+    {
+        name: "Right Path loc 15",
+        "button text": ["Chop Red Wood", "Continue on", "Head Back"],
+        "button functions": [chopRedwood, deeperWoods, goWoods],
+        text: "As you go down the right path the creepiness has subsided and it looks completely different. It is so full of life. You have found some nice looking Redwood Trees. These would be handy! What do you want to do?"
     },
 ];
 
@@ -171,6 +189,18 @@ function goMine(){
 
 function deeperWoods() {
     update(locations[12]);
+}
+
+function woodPath() {
+    update(locations[13]);
+}
+
+function leftPath() {
+    update(locations[14]);
+}
+
+function rightPath() {
+    update(locations[15]);
 }
 
 function goTown() {
@@ -248,6 +278,16 @@ function chopMaple() {
         text.innerText = "You have chopped " + mapleLog + ".";
         inventory.push(mapleLog);
         text.innerText += " You have added " + mapleLog + " to your inventory!"
+        text.innerText += " In your inventory you now have: " + inventory + ", ";
+    }
+}
+
+function chopRedwood() {
+    if (currentLogs < logs.length - 1) {
+        let redwoodLog = logs[2].name;
+        text.innerText = "You have chopped " + redwoodLog + ".";
+        inventory.push(redwoodLog);
+        text.innerText += " You have added " + redwoodLog + " to your inventory!"
         text.innerText += " In your inventory you now have: " + inventory + ", ";
     }
 }
