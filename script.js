@@ -262,23 +262,38 @@ function sellLog() {
   }
 }
 
-function chopLog(){
-if (currentLogs < logs.length - 1){
-  let newLog = logs[currentLogs].name;
-  text.innerText = "You have chopped " + newLog + ".";
-  inventory.push(newLog);
-  text.innerText += " You have added " + newLog + " to your inventory!"
-  text.innerText += " In your inventory you now have: " + inventory + ", ";
-    }
+async function chopLog(){
+    if (chopLogChance()) {
+        text.innerText = "You swing your axe, but did not get any logs";
+    } else {
+        if (currentLogs < logs.length - 1) {
+            text.innerText = "Swinging Axe..."
+            await sleep(2000);
+            let newLog = logs[currentLogs].name;
+            text.innerText = "You have chopped " + newLog + ".";
+            inventory.push(newLog);
+            text.innerText += " You have added " + newLog + " to your inventory!"
+            text.innerText += " In your inventory you now have: " + inventory + ", ";
+            if (randomFight()) {
+                fightSlime();
+            }
+        }
+    } 
 }
 
-function chopMaple() {
-    if (currentLogs < logs.length - 1) {
-        let mapleLog = logs[1].name;
-        text.innerText = "You have chopped " + mapleLog + ".";
-        inventory.push(mapleLog);
-        text.innerText += " You have added " + mapleLog + " to your inventory!"
-        text.innerText += " In your inventory you now have: " + inventory + ", ";
+async function chopMaple() {
+    if (chopLogChance()) {
+        text.innerText = "These maple trees are tough, you didn't get any logs";
+    } else {
+        if (currentLogs < logs.length - 1) {
+            text.innerText = "Swinging Axe..."
+            await sleep(4000);
+            let mapleLog = logs[1].name;
+            text.innerText = "You have chopped " + mapleLog + ".";
+            inventory.push(mapleLog);
+            text.innerText += " You have added " + mapleLog + " to your inventory!"
+            text.innerText += " In your inventory you now have: " + inventory + ", ";
+        }
     }
 }
 
@@ -387,6 +402,13 @@ function attack() {
   }
 }
 
+function chopLogChance() {
+    return Math.random() > .3;
+}
+function randomFight() {
+    return Math.random() < .05;
+}
+
 function getMonsterAttackValue(level) {
   const hit = (level * 5) - (Math.floor(Math.random() * xp));
   console.log(hit);
@@ -439,6 +461,10 @@ function pickTwo() {
 
 function pickEight() {
   pick(8);
+}
+
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
 }
 
 function pick(guess) {
