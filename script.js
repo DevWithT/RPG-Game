@@ -7,8 +7,6 @@ let monsterHealth;
 let inventory = ["stick"];
 let currentOres = 0;
 let currentLogs = 0;
-var inventoryStack = inventory.reduce((cnt, cur) => (cnt[cur] = cnt[cur] + 1 || 1, cnt), {});
-
 
 const button1 = document.querySelector('#button1');
 const button2 = document.querySelector("#button2");
@@ -231,32 +229,37 @@ function sellLog() {
     gold += 10;
     goldText.innerText = gold;
     let currentLogs = inventory.pop(inventory.indexOf("Log"));
-    text.innerText = "You sold a " + currentLogs + ".";
-    text.innerText += " In your inventory you have: " + inventory + ", ";
+      text.innerText = "You sold a " + currentLogs + ".";
+      let inventoryStack = inventory.reduce((cnt, cur) => (cnt[cur] = cnt[cur] + 1 || 1, cnt), {});
+      text.innerText += " In your inventory you have: " + JSON.stringify(inventoryStack) + ", ";
   } else if (inventory.indexOf("Maple") > -1) {
       gold += 50;
       goldText.innerText = gold;
       let currentLogs = inventory.pop(inventory.indexOf("Maple"));
       text.innerText = "You sold a " + currentLogs + ".";
-      text.innerText += " In your inventory you have: " + inventory + ", ";
+      let inventoryStack = inventory.reduce((cnt, cur) => (cnt[cur] = cnt[cur] + 1 || 1, cnt), {});
+      text.innerText += " In your inventory you have: " + JSON.stringify(inventoryStack) + ", ";
     } else if (inventory.indexOf("RedWood") > -1) {
       gold += 300;
       goldText.innerText = gold;
       let currentLogs = inventory.pop(inventory.indexOf("RedWood"));
       text.innerText = "You sold a " + currentLogs + ".";
-      text.innerText += " In your inventory you have: " + inventory + ", ";
+      let inventoryStack = inventory.reduce((cnt, cur) => (cnt[cur] = cnt[cur] + 1 || 1, cnt), {});
+      text.innerText += " In your inventory you have: " + JSON.stringify(inventoryStack) + ", ";
     } else if (inventory.indexOf("Divine Willow") > -1) {
       gold += 500;
       goldText.innerText = gold;
       let currentLogs = inventory.pop(inventory.indexOf("Divine Willow"));
       text.innerText = "You sold a " + currentLogs + ".";
-      text.innerText += " In your inventory you have: " + inventory + ", ";
+      let inventoryStack = inventory.reduce((cnt, cur) => (cnt[cur] = cnt[cur] + 1 || 1, cnt), {});
+      text.innerText += " In your inventory you have: " + JSON.stringify(inventoryStack) + ", ";
     } else if (inventory.indexOf("Holy Oak") > -1) {
       gold += 1000000;
       goldText.innerText = gold;
       let currentLogs = inventory.pop(inventory.indexOf("Holy Oak"));
       text.innerText = "You sold a " + currentLogs + ".";
-      text.innerText += " In your inventory you have: " + inventory + ", ";
+      let inventoryStack = inventory.reduce((cnt, cur) => (cnt[cur] = cnt[cur] + 1 || 1, cnt), {});
+      text.innerText += " In your inventory you have: " + JSON.stringify(inventoryStack) + ", ";
     }
 
   else {
@@ -276,6 +279,7 @@ async function chopLog(){
             await sleep(1500);
             inventory.push(newLog);
             text.innerText = " You have added " + newLog + " to your inventory!"
+            let inventoryStack = inventory.reduce((cnt, cur) => (cnt[cur] = cnt[cur] + 1 || 1, cnt), {});
             await sleep(1500);
             text.innerText = " In your inventory you now have: " + JSON.stringify(inventoryStack) + ", ";
             if (randomFight()) {
@@ -291,23 +295,35 @@ async function chopMaple() {
     } else {
         if (currentLogs < logs.length - 1) {
             text.innerText = "Swinging Axe..."
-            await sleep(4000);
+            await sleep(Math.floor(Math.random() * 7000));
             let mapleLog = logs[1].name;
             text.innerText = "You have chopped " + mapleLog + ".";
+            await sleep(1500);
             inventory.push(mapleLog);
-            text.innerText += " You have added " + mapleLog + " to your inventory!"
-            text.innerText += " In your inventory you now have: " + inventory + ", ";
+            text.innerText = " You have added " + mapleLog + " to your inventory!"
+            let inventoryStack = inventory.reduce((cnt, cur) => (cnt[cur] = cnt[cur] + 1 || 1, cnt), {});
+            await sleep(1500);
+            text.innerText = " In your inventory you now have: " + JSON.stringify(inventoryStack) + ", ";
         }
     }
 }
 
-function chopRedwood() {
-    if (currentLogs < logs.length - 1) {
-        let redwoodLog = logs[2].name;
-        text.innerText = "You have chopped " + redwoodLog + ".";
-        inventory.push(redwoodLog);
-        text.innerText += " You have added " + redwoodLog + " to your inventory!"
-        text.innerText += " In your inventory you now have: " + inventory + ", ";
+async function chopRedwood() {
+    if (chopLogChance()) {
+        text.innerText = "These RedWoods are HUGE. It's going to take more than 1 try. You didn't get any logs.";
+    } else {
+        if (currentLogs < logs.length - 1) {
+            text.innerText = "Swinging Axe..."
+            await sleep(Math.floor(Math.random() * 11000));
+            let redwoodLog = logs[2].name;
+            text.innerText = "You have chopped " + redwoodLog + ".";
+            await sleep(1500);
+            inventory.push(mapleLog);
+            text.innerText = " You have added " + redwoodLog + " to your inventory!"
+            let inventoryStack = inventory.reduce((cnt, cur) => (cnt[cur] = cnt[cur] + 1 || 1, cnt), {});
+            await sleep(1500);
+            text.innerText = " In your inventory you now have: " + JSON.stringify(inventoryStack) + ", ";
+        }
     }
 }
 
