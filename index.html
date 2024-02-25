@@ -6,35 +6,37 @@
     <title>Arcadia</title>
   </head>
   <body>
-    <div id="game">
-      <div id="stats">
-        <span class="stat">XP: <strong><span id="xpText">0</span></strong></span>
-        <span class="stat">Health: <strong><span id="healthText">100</span></strong></span>
-        <span class="stat">Gold: <strong><span id="goldText">50</span></strong></span>
+      <div id="game">
+          <div id="stats">
+              <span class="stat">XP: <strong><span id="xpText">0</span></strong></span>
+              <span class="stat">Health: <strong><span id="healthText">100</span></strong></span>
+              <span class="stat">Gold: <strong><span id="goldText">50</span></strong></span>
+          </div>
+          <div id="controls">
+              <button id="button1">Shop</button>
+              <button id="button2">Cave</button>
+              <button id="button3">Explore</button>
+              <button id="button4">Sell</button>
+          </div>
+          <div id="monsterStats">
+              <span class="stat">Monster Name: <strong><span id="monsterName"></span></strong></span>
+              <span class="stat">Health: <strong><span id="monsterHealth"></span></strong></span>
+          </div>
+          <div id="slimeMonster">
+              <img id="slime" src="./images/slime/slime.jpg">
+          </div>
+          <div id="fangedBeastMonster">
+              <img id="fangedBeast" src="./images/slime/fangedbeast.jpg">
+          </div>
+          <div id="dragonMonster">
+              <img id="dragon" src="./images/slime/dragon.jpg">
+          </div>
+          <div id="text">
+              Welcome to Arcadia. This town is in disarray. The people seem off, but townspeople will not talk to you. You are in the town square. Where do you want to go? Use the buttons above.
+          </div>
       </div>
-      <div id="controls">
-        <button id="button1">Shop</button>
-        <button id="button2">Cave</button>
-        <button id="button3">Explore</button>
-        <button id="button4">Sell</button>
-      </div>
-      <div id="monsterStats">
-        <span class="stat">Monster Name: <strong><span id="monsterName"></span></strong></span>
-        <span class="stat">Health: <strong><span id="monsterHealth"></span></strong></span>
-      </div>
-      <div id="slimeMonster">
-            <img id="slime" src="./images/slime/slime.jpg">
-      </div>
-      <div id="fangedBeastMonster">
-            <img id="fangedBeast" src="./images/slime/fangedbeast.jpg">
-      </div>
-      <div id="dragonMonster">
-            <img id="dragon" src="./images/slime/dragon.jpg">
-      </div>
-      <div id="text">
-        Welcome to Arcadia. This town is in disarray. The people seem off, but townspeople will not talk to you. You are in the town square. Where do you want to go? Use the buttons above.
-      </div>
-    </div>
-    <script src="./script.js"></script>
+      <script src="./script.js"></script>
+      <script src="./locations.js"></script>
+      <script src="./items.js"></script>
   </body>
 </html>
